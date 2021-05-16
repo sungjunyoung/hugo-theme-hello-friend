@@ -97,5 +97,35 @@
         {{ partial "comments.html" . }}
       {{ end }}
     {{ end }}
+
+
+    <br />
+    <script>
+        function updateUtterancTheme() {
+            const theme = window.localStorage && window.localStorage.getItem("theme");
+            const message = {
+                type: 'set-theme',
+                theme: theme === "dark" ? "photon-dark" : "github-light"
+            };
+            var utterances = document.querySelector('iframe');
+            utterances.contentWindow.postMessage(message, 'https://utteranc.es');
+        }
+        window.addEventListener("storage", updateUtterancTheme);
+        window.addEventListener('message', event => {
+            if (event.origin !== 'https://utteranc.es') {
+                return;
+            }
+           updateUtterancTheme();
+        });
+    </script>
+    <script 
+        src="https://utteranc.es/client.js"
+        repo="sungjunyoung/sungjunyoung.github.io"
+        issue-term="pathname"
+        label="💬"
+        theme="photon-dark"
+        crossorigin="anonymous"
+        async>
+    </script>
   </div>
 {{ end }}

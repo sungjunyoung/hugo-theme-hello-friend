@@ -11,8 +11,6 @@ if (getTheme !== null) {
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark-theme");
   window.localStorage &&
-    window.localStorage.setItem(
-      "theme",
-      document.body.classList.contains("dark-theme") ? "dark" : "light",
-    );
+    window.localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+  window.dispatchEvent( new Event('storage') );
 });
